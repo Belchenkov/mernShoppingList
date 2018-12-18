@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import {
   Collapse,
@@ -14,20 +14,27 @@ import {
 class AppNavbar extends Component {
   state = {
     isOpen: false
-  }
+  };
 
-  toogle = () => {
+  toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
-  }
+  };
 
   render() {
     return (
       <div>
         <Navbar color="dark" dark expand="sm" className="mb-5">
           <Container>
-            <NavbarBrand href="/">ShoppingList</NavbarBrand>
+              <NavbarBrand href="/">
+                  <img
+                      className="mr-2"
+                      src="https://img.icons8.com/color/48/000000/test-partial-passed.png"
+                      alt="Logo"
+                  />
+                  ShoppingList
+              </NavbarBrand>
             <NavbarToggler onClick={this.toggle}></NavbarToggler>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
@@ -40,7 +47,6 @@ class AppNavbar extends Component {
         </Navbar>
     </div>
     );
-    
   }
 }
 
