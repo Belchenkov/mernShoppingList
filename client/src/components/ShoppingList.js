@@ -6,9 +6,8 @@ import {
     Button
 } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import uuid from 'uuid';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/itemActions';
+import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
 class ShoppingList extends Component {
@@ -16,12 +15,16 @@ class ShoppingList extends Component {
         this.props.getItems();
     }
 
+    onDeleteClick = id => {
+      this.props.deleteItem(id);
+    };
+
     render () {
         const { items } = this.props.item;
 
         return(
             <Container>
-                <Button
+                {/*<Button
                     color="dark"
                     style={{marginBottom: '2rem'}}
                     onClick={() => {
@@ -32,7 +35,7 @@ class ShoppingList extends Component {
                              }));
                          }
                     }}
-                >Add Item</Button>
+                >Add Item</Button>*/}
 
                 <ListGroup>
                     <TransitionGroup className="shopping-list">
@@ -47,11 +50,7 @@ class ShoppingList extends Component {
                                         className="remove-btn"
                                         size="sm"
                                         color="danger"
-                                        onClick={() => {
-                                            this.setState(state => ({
-                                                items: state.items.filter(item => item.id !== id)
-                                            }));
-                                        }}
+                                        onClick={this.onDeleteClick.bind(this, id)}
                                     >&times;</Button>
                                     {name}
                                 </ListGroupItem>
@@ -66,6 +65,7 @@ class ShoppingList extends Component {
 
 ShoppingList.propTypes = {
     getItems: PropTypes.func.isRequired,
+    deleteItem: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired
 };
 
@@ -73,4 +73,4 @@ const mapStateToProps = (state) => ({
     item: state.item
 });
 
-export default connect(mapStateToProps, { getItems })(ShoppingList);
+export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList);
