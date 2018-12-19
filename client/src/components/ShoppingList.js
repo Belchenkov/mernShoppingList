@@ -24,24 +24,11 @@ class ShoppingList extends Component {
 
         return(
             <Container>
-                {/*<Button
-                    color="dark"
-                    style={{marginBottom: '2rem'}}
-                    onClick={() => {
-                        const name = prompt('Enter Item');
-                         if (name) {
-                             this.setState(state => ({
-                                 items: [...state.items, { id: uuid(), name }]
-                             }));
-                         }
-                    }}
-                >Add Item</Button>*/}
-
                 <ListGroup>
                     <TransitionGroup className="shopping-list">
-                        {items.map(({id, name}) => (
+                        {items.map(({ _id, name }) => (
                             <CSSTransition
-                                key={id}
+                                key={_id}
                                 timeout={500}
                                 classNames="fade"
                             >
@@ -50,7 +37,7 @@ class ShoppingList extends Component {
                                         className="remove-btn"
                                         size="sm"
                                         color="danger"
-                                        onClick={this.onDeleteClick.bind(this, id)}
+                                        onClick={this.onDeleteClick.bind(this, _id)}
                                     >&times;</Button>
                                     {name}
                                 </ListGroupItem>
